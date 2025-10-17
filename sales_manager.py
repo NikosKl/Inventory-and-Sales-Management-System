@@ -1,0 +1,44 @@
+from product_manager import get_positive_number, get_valid_input
+from datetime import datetime
+
+def record_sale(cur):
+    product_id = get_positive_number('\nEnter the id of the product you want to buy: ')
+    cur.execute('SELECT * FROM Products WHERE id = ?',(product_id, ))
+    row = cur.fetchone()
+
+    if row is None:
+        print("\nProduct doesn't exist!")
+        return
+    else:
+        while True:
+            quantity_sold = get_positive_number(f'\nPlease enter the quantity you want to buy for the product {row[1]}: ') 
+            if quantity_sold > row[4]:
+                print(f'\nNot enough quantity. The available stock for the product is: {row[4]}. Please try again!')
+                continue
+            else:
+                print(f'\nThe total cost of your order is: {row[3] * quantity_sold:.2f}€')
+                sale_confirmation = get_valid_input('\nDo you want to proceed with the order? (y/n): ',['y','n'])
+                if sale_confirmation == 'n':
+                    print('\nOrder canceled.')
+                    break
+                else:
+                    order_date = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+                    cur.execute('INSERT INTO Sales (product_id, quantity_sold, sale_date) VALUES (?,?,?)',(row[0],quantity_sold,order_date))
+                    updated_stock = row[4] - quantity_sold
+                    cur.execute('UPDATE Products SET stock_qty = ? WHERE id = ?',(updated_stock, row[0]))
+                    print(f'\nSale recorded successfully! Remaining stock: {updated_stock:.0f} pieces')
+                    cur.connection.commit()
+                    break
+
+def show_sales(cur):
+    cur.execute('SELECT Sales.id, Products.name, Sales.quantity_sold, Sales.sale_date FROM Sales JOIN Products ON Sales.product_id = Products.id')
+    rows = cur.fetchall()
+
+    if not rows:
+        print('No sales found.')
+        return
+    else:
+        print('\nAll time Sales\n')
+        for row in rows:
+            print(f'Sale ID: {row[0]} | Product: {row[1]} | Quantity: {row[2]} | Date: {row[3]}')
+        

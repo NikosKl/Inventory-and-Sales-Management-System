@@ -41,6 +41,7 @@ def add_product(cur):
     cur.execute('''INSERT OR IGNORE INTO Products 
                 (name, category, price, stock_qty) VALUES (?,?,?,?)''', (product_name, category_name, price, stock))
     print('\nProduct has been added in the inventory\n')
+    cur.connection.commit()
 
 # Update product
 def update_product(cur):
@@ -69,6 +70,7 @@ def update_product(cur):
             stock_update = get_positive_number('\nPlease type the updated stock: ')
             cur.execute('UPDATE Products SET stock_qty = ? WHERE id = ?',(stock_update, row[0]))
             print('\nStock has been updated!')
+            cur.connection.commit()
 
 # Delete product
 def delete_product(cur):
@@ -82,6 +84,7 @@ def delete_product(cur):
     else:
         cur.execute('DELETE FROM Products WHERE id = ?',(row[0], ))
         print('\nThe product has been deleted!')
+        cur.connection.commit()
 
 # Show all products
 def show_all(cur):
@@ -89,8 +92,4 @@ def show_all(cur):
     cur.execute('SELECT * FROM PRODUCTS')
 
     for row in cur.fetchall():
-        print(f'Product: {row[1]} | Category: {row[2]} | Price: {row[3]:.2f} | Available Stock: {row[4]}')    
-    
-
-
-
+        print(f'Product: {row[1]} | Category: {row[2]} | Price: {row[3]:.2f} | Available Stock: {row[4]}') 
