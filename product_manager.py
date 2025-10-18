@@ -55,7 +55,7 @@ def update_product(cur):
     else:
         update_choice = get_valid_input('\nChoose which value you want to update (Name/Category/Price/Stock): ',['name','category','price','stock'])
         if update_choice == 'name':
-            name_update = input('\nPlease type the new name:  ').title()
+            name_update = input('\nPlease type the new name:  ')
             cur.execute('UPDATE Products SET name = ? WHERE id = ?',(name_update, row[0]))
             print('\nProduct name has been updated!')
         elif update_choice == 'category':
