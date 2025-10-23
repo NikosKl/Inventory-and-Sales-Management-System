@@ -12,6 +12,9 @@ def record_sale(cur):
     else:
         while True:
             quantity_sold = get_positive_number(f'\nPlease enter the quantity you want to buy for the product {row[1]}: ') 
+            if quantity_sold == 0:
+                print('\nQuantity cant be zero. Please try again!')
+                continue
             if quantity_sold > row[4]:
                 print(f'\nNot enough quantity. The available stock for the product is: {row[4]}. Please try again!')
                 continue
