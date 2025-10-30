@@ -46,8 +46,8 @@ pip install -r requirements.txt
 
 python -m src.main
 
-## Project Structure 
-
+##  Project Structure
+```
 ./
 ├── data/
 │ └── setup_db.py
@@ -68,7 +68,8 @@ python -m src.main
 │ ├── product_manager.py
 │ ├── reports_manager.py
 │ ├── sales_manager.py
-│ └── supplier_manager.py
+│ └── supplier_manager.py 
+```
 
 ## Usage Guide
 
