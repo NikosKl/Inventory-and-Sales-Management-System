@@ -50,25 +50,25 @@ python -m src.main
 
 ./
 ├── data/
-│   └── setup_db.py
+│ └── setup_db.py
 ├── exports/
-│   ├── products_export_2025-10-29_16_00.csv
-│   ├── sales_export_2025-10-29_16_06.csv
-│   ├── supplierProducts_export_2025-10-29_16_06.csv
-│   └── suppliers_export_2025-10-29_16_06.csv
+│ ├── products_export_YYYY-MM-DD_HH_MM.csv
+│ ├── sales_export_YYYY-MM-DD_HH_MM.csv
+│ ├── supplierProducts_export_YYYY-MM-DD_HH_MM.csv
+│ └── suppliers_export_YYYY-MM-DD_HH_MM.csv
 ├── inventory.sqlite
 ├── requirements.txt
 ├── README.md
 ├── src/
-│   ├── __init__.py
-│   ├── export_manager.py
-│   ├── helpers.py
-│   ├── main.py
-│   ├── menu_manager.py
-│   ├── product_manager.py
-│   ├── reports_manager.py
-│   ├── sales_manager.py
-│   └── supplier_manager.py
+│ ├── init.py
+│ ├── export_manager.py
+│ ├── helpers.py
+│ ├── main.py
+│ ├── menu_manager.py
+│ ├── product_manager.py
+│ ├── reports_manager.py
+│ ├── sales_manager.py
+│ └── supplier_manager.py
 
 ## Usage Guide
 
