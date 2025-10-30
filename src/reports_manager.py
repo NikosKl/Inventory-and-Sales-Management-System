@@ -22,7 +22,7 @@ def total_orders(cur):
     if sale[0] == 0:
         raise ValueError ('\nNo sales found in the database.')
     else:
-        print(f'\n Total sales: {sale[0]}')
+        print(f'Total sales: {sale[0]}')
 
 # Best seller by quantity 
 def best_seller(cur, pd):

@@ -1,4 +1,4 @@
-from helpers import get_positive_number, get_alphabetic_input, get_valid_input
+from src.helpers import get_positive_number, get_alphabetic_input, get_valid_input
 
 # Add product to the inventory
 def add_product(cur):
