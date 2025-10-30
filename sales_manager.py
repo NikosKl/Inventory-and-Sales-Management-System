@@ -1,7 +1,16 @@
-from product_manager import get_positive_number, get_valid_input
+from helpers import get_positive_number, get_valid_input
 from datetime import datetime
+from tabulate import tabulate
 
-def record_sale(cur):
+def record_sale(cur, pd):
+    active_products = pd.read_sql_query('SELECT * FROM Products WHERE stock_qty > 0', cur.connection)
+    if active_products.empty:
+        print('\nNo products found.')
+        return
+    else:
+        title = ' Active Products '
+        print(f'\n' + title.center(80, '-'))
+        print(tabulate(active_products, headers='keys', tablefmt='simple_grid', showindex= False))
     product_id = get_positive_number('\nEnter the id of the product you want to buy: ')
     cur.execute('SELECT * FROM Products WHERE id = ?',(product_id, ))
     row = cur.fetchone()
@@ -33,15 +42,14 @@ def record_sale(cur):
                     cur.connection.commit()
                     break
 
-def show_sales(cur):
-    cur.execute('SELECT Sales.id, Products.name, Sales.quantity_sold, Sales.sale_date FROM Sales JOIN Products ON Sales.product_id = Products.id')
-    rows = cur.fetchall()
-
-    if not rows:
+def show_sales(cur, pd):
+    sales = pd.read_sql_query('SELECT Sales.id, Products.name, Sales.quantity_sold, Sales.sale_date FROM Sales JOIN Products ON Sales.product_id = Products.id', cur.connection)
+    sales['sale_date'] = pd.to_datetime(sales['sale_date']).dt.strftime('%Y-%m-%d %H:%M')
+    if sales.empty:
         print('No sales found.')
         return
     else:
-        print('\nAll time Sales\n')
-        for row in rows:
-            print(f'Sale ID: {row[0]} | Product: {row[1]} | Quantity: {row[2]} | Date: {row[3]}')
+        title = ' All Time Sales '
+        print(f'\n' + title.center(74, '-'))
+        print(tabulate(sales, headers='keys', tablefmt='simple_grid', showindex= False))
         

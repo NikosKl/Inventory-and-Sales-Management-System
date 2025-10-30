@@ -1,29 +1,8 @@
-from product_manager import get_valid_input, get_positive_number
-from email_validator import validate_email, EmailNotValidError
+from helpers import get_valid_input, get_positive_number, get_valid_email, products_ids_input
 from tabulate import tabulate
 
-def get_valid_email():
-    while True:
-        try:
-            mail = input('\nEnter a valid mail: ')
-            valid = validate_email(mail, check_deliverability=False)
-            return valid.email   
-        except EmailNotValidError as error:
-            print('Invalid Email: ', error)
-
-def products_ids_input():
-    while True:
-        product_id = input("\nEnter product id's to assign (comma-separated): ")
-        product_ids = [p_id.strip() for p_id in product_id.split(',') if p_id.strip().isdigit()]
-
-        if not product_ids:
-            print('\nNo valid product ID entered.')
-        else:
-            product_ids = list(map(int, product_ids))
-            return product_ids
-
 def add_supplier(cur):
-    supplier_name = input('\nEnter suppliers name: ').strip()
+    supplier_name = input('\nEnter suppliers name: ').strip().title()
     supplier_contact = get_valid_email()
     cur.execute('INSERT OR IGNORE INTO Suppliers (name, contact) VALUES (?,?)',(supplier_name, supplier_contact))
     print('\nSupplier has been added successfully!')
@@ -53,7 +32,7 @@ def update_supplier(cur):
     else:
         update_choice = get_valid_input('\nChoose which value you want to update (Name/Contact): ',['name','contact'])
         if update_choice == 'name':
-            supplier_name = input('\nPlease type a new name: ').strip()
+            supplier_name = input('\nPlease type a new name: ').strip().title()
             cur.execute('UPDATE Suppliers SET name = ? WHERE id = ?',(supplier_name, row[0]))
             print('\nSupplier name has been updated!')
             cur.connection.commit()
@@ -64,7 +43,7 @@ def update_supplier(cur):
             cur.connection.commit()
 
 def show_all_suppliers(cur):
-    print('\n--- Active Suppliers ---\n')
+    print('\n--- Supplier List ---\n')
     cur.execute('SELECT * FROM SUPPLIERS')
     for rows in cur.fetchall():
         print(f'Supplier ID: {rows[0]} | Supplier Name: {rows[1]} | Supplier Contact: {rows[2]}')

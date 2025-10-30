@@ -3,6 +3,8 @@ import sqlite3
 connection = sqlite3.connect('inventory.sqlite')
 cur = connection.cursor()
 
+cur.execute('PRAGMA FOREIGN_KEYS = 1;')
+
 cur.executescript('''
 CREATE TABLE IF NOT EXISTS Products(
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -23,13 +25,9 @@ CREATE TABLE IF NOT EXISTS Suppliers(
 CREATE TABLE IF NOT EXISTS SupplierProducts(
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         supplier_id INTEGER,
-        product_id INTEGER);''')
-
-cur.execute('SELECT * FROM Products')
-
-print('The available products are:\n')
-for row in cur.fetchall():
-    print(f'ID: {row[0]} | Name: {row[1]} | Category: {row[2]} | Retail Price: {row[3]} | Quantity: {row[4]}')
+        product_id INTEGER,
+        FOREIGN KEY (supplier_id) REFERENCES Suppliers(id) ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE CASCADE);''')
 
 connection.commit()
 cur.close()
