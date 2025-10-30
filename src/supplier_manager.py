@@ -1,4 +1,4 @@
-from helpers import get_valid_input, get_positive_number, get_valid_email, products_ids_input
+from src.helpers import get_valid_input, get_positive_number, get_valid_email, products_ids_input
 from tabulate import tabulate
 
 def add_supplier(cur):

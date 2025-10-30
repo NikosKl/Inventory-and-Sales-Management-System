@@ -1,9 +1,9 @@
-from product_manager import add_product, update_product, delete_product, show_all
-from helpers import get_valid_input
-from sales_manager import record_sale, show_sales
-from supplier_manager import add_supplier, update_supplier, delete_supplier, assign_products_to_supplier, show_all_suppliers
-from reports_manager import total_revenue, best_seller, sales_trend, total_orders, stock_report, low_stock_report, active_suppliers, supplier_product_coverage, products_without_supplier
-from export_manager import export_data
+from src.product_manager import add_product, update_product, delete_product, show_all
+from src.helpers import get_valid_input
+from src.sales_manager import record_sale, show_sales
+from src.supplier_manager import add_supplier, update_supplier, delete_supplier, assign_products_to_supplier, show_all_suppliers
+from src.reports_manager import total_revenue, best_seller, sales_trend, total_orders, stock_report, low_stock_report, active_suppliers, supplier_product_coverage, products_without_supplier
+from src.export_manager import export_data
 
 ###  PRODUCT MENU
 
