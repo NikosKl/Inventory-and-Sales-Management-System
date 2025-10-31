@@ -106,8 +106,8 @@ def sales_trend(cur, pd):
                                          ON Sales.product_id = Products.id
                                          GROUP BY sale_day''', cur.connection)
     sales_by_date['sale_day'] = pd.to_datetime(sales_by_date['sale_day'])
-    full_date_range = pd.date_range(sales_by_date['sale_day'].min(), sales_by_date['sale_day'].max())
-    sales_by_date = sales_by_date.set_index('sale_day').reindex(full_date_range, fill_value = 0)
+    sales_by_date = sales_by_date.set_index('sale_day')
+    sales_by_date = (sales_by_date.resample('D').sum().fillna(0))
     sales_by_date.index.name = 'sale_day'
 
     plt.figure(figsize=(10,6))

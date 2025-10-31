@@ -24,6 +24,26 @@ A command-line Python app to manage products, suppliers and sales with reports, 
 - **Email-Validator** for input validation
 - **VS Code** as development environment
 
+## Demo
+
+### Main Menu
+
+A simple command-line interface for navigating between product, sales, suppler features.
+
+![Main Menu](assets/main_menu.png)
+
+### Record Sale
+
+Demonstrates the sale process, with product validation, total cost calculation and stock updates.
+
+![Record Sale](assets/record_sale.png)
+
+### Sales Trend Chart
+
+Visual report showing daily total sales using Matplotlib
+
+![Sales Trend](assets/sales_trend.jpeg)
+
 ## Installation & Setup
 
 1. **Clone the repository**
