@@ -54,18 +54,20 @@ cd Inventory-and-Sales-Management-System
 
 2. Create and activate a virtual environment
 
+```bash
 python -m venv venv
 source venv\bin\activate # on macOS/Linux
 venv\Scripts\activate # on Windows
+```
 
 3. Install dependencies
-
+```bash
 pip install -r requirements.txt
-
+```
 4. Run the project
-
+```bash
 python -m src.main
-
+```
 ##  Project Structure
 ```
 ./
@@ -95,7 +97,7 @@ python -m src.main
 
 After running the project (`python -m src.main`), the main menu will appear:
 
---- Inventory Management system -- 
+--- Inventory Management system --- 
 
 1. Products
 2. Sales
