@@ -56,7 +56,7 @@ cd Inventory-and-Sales-Management-System
 
 ```bash
 python -m venv venv
-source venv\bin\activate # on macOS/Linux
+source venv/bin/activate # on macOS/Linux
 venv\Scripts\activate # on Windows
 ```
 
