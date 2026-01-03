@@ -74,7 +74,7 @@ def active_suppliers(cur, pd):
     if supplier_info.empty:
         print('\nNo Suppliers found in the database.')
     else:
-        print('\n' + tabulate(supplier_info, headers='keys', tablefmt='simple_grid'))
+        print('\n' + tabulate(supplier_info, headers='keys', tablefmt='simple_grid', showindex=False))
 
 
 def supplier_product_coverage(cur, pd):

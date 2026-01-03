@@ -76,10 +76,14 @@ def assign_products_to_supplier(cur, pd):
             for id in assigned_products:
                 if id in data['id'].values:
                     cur.execute('INSERT OR IGNORE INTO SupplierProducts (supplier_id, product_id) VALUES (?,?)',(supplier_id, id)) 
-                    updated = True
+
+                    if cur.rowcount == 1:
+                        updated = True
                 else:
                     print("\nProduct id doesn't exist")
 
             if updated:
                 print("\nID's have been updated!")
-                cur.connection.commit()
+            else:
+                print("\nProducts have already ID's assigned!")
+        cur.connection.commit()

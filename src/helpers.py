@@ -22,7 +22,7 @@ def get_positive_number(prompt):
             else:
                 return user_input
         except ValueError:
-            print('Please type a price')
+            print('\nPlease enter a valid value.')
 
 # Alphabetic input validation
 def get_alphabetic_input(prompt):

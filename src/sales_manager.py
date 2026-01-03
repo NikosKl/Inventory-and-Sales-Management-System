@@ -46,7 +46,7 @@ def show_sales(cur, pd):
     sales = pd.read_sql_query('SELECT Sales.id, Products.name, Sales.quantity_sold, Sales.sale_date FROM Sales JOIN Products ON Sales.product_id = Products.id', cur.connection)
     sales['sale_date'] = pd.to_datetime(sales['sale_date']).dt.strftime('%Y-%m-%d %H:%M')
     if sales.empty:
-        print('No sales found.')
+        print('\nNo sales found.')
         return
     else:
         title = ' All Time Sales '

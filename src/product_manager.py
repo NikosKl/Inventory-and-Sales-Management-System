@@ -38,7 +38,7 @@ def update_product(cur):
             stock_update = get_positive_number('\nPlease type the updated stock: ')
             cur.execute('UPDATE Products SET stock_qty = ? WHERE id = ?',(stock_update, row[0]))
             print('\nStock has been successfully updated.')
-            cur.connection.commit()
+    cur.connection.commit()
 
 # Delete product
 def delete_product(cur):
@@ -58,6 +58,11 @@ def delete_product(cur):
 def show_all(cur):
     print('\n--- Available Products ---\n')
     cur.execute('SELECT * FROM PRODUCTS')
+    rows = cur.fetchall()
 
-    for row in cur.fetchall():
+    if rows is None:
+        print('The are no products in the database.')
+        return
+
+    for row in rows:
         print(f'ID: {row[0]} | Product: {row[1]} | Category: {row[2]} | Price: {row[3]:.2f}€ | Available Stock: {row[4]}') 

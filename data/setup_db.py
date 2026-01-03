@@ -24,8 +24,9 @@ CREATE TABLE IF NOT EXISTS Suppliers(
         contact TEXT);
 CREATE TABLE IF NOT EXISTS SupplierProducts(
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        supplier_id INTEGER,
-        product_id INTEGER,
+        supplier_id INTEGER NOT NULL,
+        product_id INTEGER NOT NULL,
+        UNIQUE (supplier_id, product_id)
         FOREIGN KEY (supplier_id) REFERENCES Suppliers(id) ON DELETE CASCADE,
         FOREIGN KEY (product_id) REFERENCES Products(id) ON DELETE CASCADE);''')
 
