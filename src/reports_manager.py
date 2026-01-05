@@ -1,5 +1,6 @@
 from tabulate import tabulate
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 # ----- SALES REPORT -----
 
@@ -113,6 +114,12 @@ def sales_trend(cur, pd):
     plt.figure(figsize=(10,6))
 
     plt.plot(sales_by_date.index, sales_by_date['total_sales'], marker = 'o')
+
+    ax = plt.gca()
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=1))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    ax.set_xlim(sales_by_date.index.min(), sales_by_date.index.max())
+    plt.xticks(rotation=45)
     plt.title('Total Sales Per Day')
     plt.xlabel('Date')
     plt.ylabel('Sales (€)')
