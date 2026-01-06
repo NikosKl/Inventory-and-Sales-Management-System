@@ -16,7 +16,6 @@ def update_product(cur):
     product_id = get_positive_number('\nEnter the id of the product you want to update: ')
     cur.execute('SELECT * FROM Products WHERE id = ?', (product_id, ))
     row = cur.fetchone()
-    #print(row)
     if row is None:
         print("\nNo products found in the database.")
         return 

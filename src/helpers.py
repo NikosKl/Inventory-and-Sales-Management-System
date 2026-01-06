@@ -38,9 +38,10 @@ def get_valid_email():
         try:
             mail = input('\nEnter a valid mail: ')
             valid = validate_email(mail, check_deliverability=False)
-            return valid.email   
+            email = valid.normalized
+            return email   
         except EmailNotValidError as error:
-            print('Invalid Email: ', error)
+            print('\nInvalid Email: ', error)
 
 def products_ids_input():
     while True:
