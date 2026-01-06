@@ -1,9 +1,9 @@
-import sqlite3
 import pandas as pd
 from src.menu_manager import product_menu, sales_menu, supplier_menu, reports_menu
 from src.helpers import get_valid_input
+from data.db import get_connection
 
-connection = sqlite3.connect('inventory.sqlite')
+connection = get_connection()
 cur = connection.cursor()
 
 while True:

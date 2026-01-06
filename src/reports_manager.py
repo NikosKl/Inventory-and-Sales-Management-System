@@ -99,7 +99,7 @@ def products_without_supplier(cur, pd):
     if products.empty:
         print('\nNo products found in the database.')
     else:
-        print('\n' + tabulate(products, headers='keys', tablefmt='simple_grid', showindex=False))
+        print(tabulate(products, headers='keys', tablefmt='simple_grid', showindex=False))
 
 def sales_trend(cur, pd):
     sales_by_date = pd.read_sql_query('''SELECT DATE(sale_date) AS sale_day, SUM(quantity_sold * price) as total_sales
